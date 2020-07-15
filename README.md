@@ -1,4 +1,4 @@
-# snowflake ![snowflake][snowflake]
+# snowflake ![][snowflake]
 
 ---
 
