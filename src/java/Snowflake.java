@@ -176,7 +176,7 @@ public class Snowflake {
      * @param length offset+length is right margin position
      * @return a long value
      */
-    private long diode(long offset, long length) {
+    private static long diode(long offset, long length) {
         int lb = (int) (64 - offset);
         int rb = (int) (64 - (offset + length));
         return (-1L << lb) ^ (-1L << rb);
@@ -209,29 +209,33 @@ public class Snowflake {
     public String formatID(long id) {
         long[] arr = parseID(id);
         String tmf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date(arr[0]));
-        return String.format("%s, #%d, @(%d,%d)", tmf, arr[3], arr[1], arr[2]);
+        return String.format("%s, #%d, @(%d, %d)", tmf, arr[3], arr[1], arr[2]);
     }
 
+    /**
+     * Show settings of this snowflake instance.
+     * @return a string represents settings of this snowflake instance.
+     */
     @Override
     public String toString() {
-        return "Snowflake {" +
-                " EPOCH=" + EPOCH +
-                ", UNUSED_BITS=" + UNUSED_BITS +
-                ", TIMESTAMP_BITS=" + TIMESTAMP_BITS +
-                ", DATA_CENTER_ID_BITS=" + DATA_CENTER_ID_BITS +
-                ", MACHINE_ID_BITS=" + MACHINE_ID_BITS +
-                ", SEQUENCE_BITS=" + SEQUENCE_BITS +
-                ", MAX_DATA_CENTER_NUM=" + MAX_DATA_CENTER_NUM +
-                ", MAX_MACHINE_NUM=" + MAX_MACHINE_NUM +
-                ", MAX_SEQUENCE=" + MAX_SEQUENCE +
-                ", MACHINE_ID_SHIFT=" + MACHINE_ID_SHIFT +
-                ", DATA_CENTER_ID_SHIFT=" + DATA_CENTER_ID_SHIFT +
-                ", TIMESTAMP_SHIFT=" + TIMESTAMP_SHIFT +
-                ", dataCenterID=" + dataCenterID +
-                ", machineID=" + machineID +
-                ", sequence=" + sequence +
-                ", lastTimestamp=" + lastTimestamp +
-                " }";
+        return "{\"Snowflake\":{" +
+                "\"EPOCH\":" + EPOCH +
+                ",\"UNUSED_BITS\":" + UNUSED_BITS +
+                ",\"TIMESTAMP_BITS\":" + TIMESTAMP_BITS +
+                ",\"DATA_CENTER_ID_BITS\":" + DATA_CENTER_ID_BITS +
+                ",\"MACHINE_ID_BITS\":" + MACHINE_ID_BITS +
+                ",\"SEQUENCE_BITS\":" + SEQUENCE_BITS +
+                ",\"MAX_DATA_CENTER_NUM\":" + MAX_DATA_CENTER_NUM +
+                ",\"MAX_MACHINE_NUM\":" + MAX_MACHINE_NUM +
+                ",\"MAX_SEQUENCE\":" + MAX_SEQUENCE +
+                ",\"MACHINE_ID_SHIFT\":" + MACHINE_ID_SHIFT +
+                ",\"DATA_CENTER_ID_SHIFT\":" + DATA_CENTER_ID_SHIFT +
+                ",\"TIMESTAMP_SHIFT\":" + TIMESTAMP_SHIFT +
+                ",\"dataCenterID\":" + dataCenterID +
+                ",\"machineID\":" + machineID +
+                ",\"sequence\":" + sequence +
+                ",\"lastTimestamp\":" + lastTimestamp +
+                "}}";
     }
 
 }
