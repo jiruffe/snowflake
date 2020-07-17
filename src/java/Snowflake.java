@@ -58,8 +58,8 @@ public class Snowflake {
     /*
      * Max values of dataCenterID, machineID and sequence.
      */
-    private final long MAX_DATA_CENTER_NUM = ~(-1L << DATA_CENTER_ID_BITS);     // 2^5-1
-    private final long MAX_MACHINE_NUM = ~(-1L << MACHINE_ID_BITS);             // 2^5-1
+    private final long MAX_DATA_CENTER_ID = ~(-1L << DATA_CENTER_ID_BITS);     // 2^5-1
+    private final long MAX_MACHINE_ID = ~(-1L << MACHINE_ID_BITS);             // 2^5-1
     private final long MAX_SEQUENCE = ~(-1L << SEQUENCE_BITS);                  // 2^12-1
 
     /*
@@ -102,13 +102,13 @@ public class Snowflake {
      * @param machineID    machine or process number, value range: [0,31]
      */
     public Snowflake(long dataCenterID, long machineID) {
-        if (dataCenterID > MAX_DATA_CENTER_NUM || dataCenterID < 0) {
+        if (dataCenterID > MAX_DATA_CENTER_ID || dataCenterID < 0) {
             throw new IllegalArgumentException(
-                    String.format("dataCenterID can't be greater than MAX_DATA_CENTER_NUM ( %d ) or less than 0", MAX_DATA_CENTER_NUM));
+                    String.format("dataCenterID can't be greater than MAX_DATA_CENTER_ID ( %d ) or less than 0", MAX_DATA_CENTER_ID));
         }
-        if (machineID > MAX_MACHINE_NUM || machineID < 0) {
+        if (machineID > MAX_MACHINE_ID || machineID < 0) {
             throw new IllegalArgumentException(
-                    String.format("machineID can't be greater than MAX_MACHINE_NUM ( %d ) or less than 0", MAX_MACHINE_NUM));
+                    String.format("machineID can't be greater than MAX_MACHINE_ID ( %d ) or less than 0", MAX_MACHINE_ID));
         }
         this.dataCenterID = dataCenterID;
         this.machineID = machineID;
@@ -225,8 +225,8 @@ public class Snowflake {
                 ",\"DATA_CENTER_ID_BITS\":" + DATA_CENTER_ID_BITS +
                 ",\"MACHINE_ID_BITS\":" + MACHINE_ID_BITS +
                 ",\"SEQUENCE_BITS\":" + SEQUENCE_BITS +
-                ",\"MAX_DATA_CENTER_NUM\":" + MAX_DATA_CENTER_NUM +
-                ",\"MAX_MACHINE_NUM\":" + MAX_MACHINE_NUM +
+                ",\"MAX_DATA_CENTER_ID\":" + MAX_DATA_CENTER_ID +
+                ",\"MAX_MACHINE_ID\":" + MAX_MACHINE_ID +
                 ",\"MAX_SEQUENCE\":" + MAX_SEQUENCE +
                 ",\"MACHINE_ID_SHIFT\":" + MACHINE_ID_SHIFT +
                 ",\"DATA_CENTER_ID_SHIFT\":" + DATA_CENTER_ID_SHIFT +

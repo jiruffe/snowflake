@@ -65,7 +65,7 @@ namespace Com.Jiruffe {
 
         #region Max values of dataCenterID, machineID and sequence.
 
-        private const ulong MAX_DATA_CENTER_NUM = ~(ulong.MaxValue << DATA_CENTER_ID_BITS);     // 2^5-1
+        private const ulong MAX_DATA_CENTER_ID = ~(ulong.MaxValue << DATA_CENTER_ID_BITS);     // 2^5-1
         private const ulong MAX_MACHINE_NUM = ~(ulong.MaxValue << MACHINE_ID_BITS);             // 2^5-1
         private const ulong MAX_SEQUENCE = ~(ulong.MaxValue << SEQUENCE_BITS);                  // 2^12-1
 
@@ -127,9 +127,9 @@ namespace Com.Jiruffe {
         /// Machine or process number, value range: [0,31]
         /// </param>
         public Snowflake(ulong DataCenterID, ulong MachineID) {
-            if (DataCenterID > MAX_DATA_CENTER_NUM || DataCenterID < 0UL) {
+            if (DataCenterID > MAX_DATA_CENTER_ID || DataCenterID < 0UL) {
                 throw new ArgumentOutOfRangeException(
-                        string.Format("DataCenterID can't be greater than MAX_DATA_CENTER_NUM ( {0} ) or less than 0", MAX_DATA_CENTER_NUM));
+                        string.Format("DataCenterID can't be greater than MAX_DATA_CENTER_ID ( {0} ) or less than 0", MAX_DATA_CENTER_ID));
             }
             if (MachineID > MAX_MACHINE_NUM || MachineID < 0UL) {
                 throw new ArgumentOutOfRangeException(
@@ -286,7 +286,7 @@ namespace Com.Jiruffe {
                 ",\"DATA_CENTER_ID_BITS\":" + DATA_CENTER_ID_BITS +
                 ",\"MACHINE_ID_BITS\":" + MACHINE_ID_BITS +
                 ",\"SEQUENCE_BITS\":" + SEQUENCE_BITS +
-                ",\"MAX_DATA_CENTER_NUM\":" + MAX_DATA_CENTER_NUM +
+                ",\"MAX_DATA_CENTER_ID\":" + MAX_DATA_CENTER_ID +
                 ",\"MAX_MACHINE_NUM\":" + MAX_MACHINE_NUM +
                 ",\"MAX_SEQUENCE\":" + MAX_SEQUENCE +
                 ",\"MACHINE_ID_SHIFT\":" + MACHINE_ID_SHIFT +
