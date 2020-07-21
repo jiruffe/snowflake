@@ -34,6 +34,7 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <pthread.h>
 
 #ifndef snowflake_id_t
 #define snowflake_id_t uint_fast64_t
@@ -42,5 +43,34 @@
 #ifndef SNOWFLAKE_ID_MAX
 #define SNOWFLAKE_ID_MAX UINT_FAST64_MAX
 #endif
+
+typedef struct snowflake_t
+{
+    /*
+     * Data center number the process running on, its value can't be modified after initialization.
+     * max: 2^5-1 range: [0,31]
+     */
+    uint_fast64_t data_center_id;
+    /*
+     * Machine or process number, its value can't be modified after initialization.
+     * max: 2^5-1 range: [0,31]
+     */
+    uint_fast64_t machine_id;
+    /*
+     * The unique and incrementing sequence number scoped in only one
+     * period/unit (here is ONE millisecond). its value will be increased by 1
+     * in the same specified period and then reset to 0 for next period.
+     * max: 2^12-1 range: [0,4095]
+     */
+    uint_fast64_t sequence;
+    /*
+     * The timestamp last snowflake ID generated.
+     */
+    uint_fast64_t last_timestamp;
+    /*
+     * The mutex.
+     */
+    pthread_mutex_t * mutex;
+} snowflake_t;
 
 #endif // _SNOWFLAKE_H
