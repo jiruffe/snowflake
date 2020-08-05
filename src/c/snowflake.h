@@ -73,4 +73,13 @@ typedef struct snowflake_t
     pthread_mutex_t * mutex;
 } snowflake_t;
 
+snowflake_t *
+snowflake_construct(uint_fast64_t data_center_id, uint_fast64_t machine_id);
+
+void *
+snowflake_destruct(snowflake_t * snowflake);
+
+snowflake_id_t
+snowflake_next_id(snowflake_t * snowflake);
+
 #endif // _SNOWFLAKE_H

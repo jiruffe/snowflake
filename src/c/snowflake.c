@@ -125,13 +125,20 @@ snowflake_next_id(snowflake_t * snowflake) {
 
     pthread_mutex_lock(snowflake -> mutex);
 
+    
+
     pthread_mutex_unlock(snowflake -> mutex);
 
 }
 
 static
 uint_fast64_t
-snwoflake_get_next_millisecond() {
+snwoflake_get_next_millisecond(snowflake_t * snowflake, uint_fast64_t current_timestamp) {
+
+    while (current_timestamp <= snowflake -> last_timestamp) {
+        current_timestamp = snowflake_get_timestamp();
+    }
+    return current_timestamp;
 
 }
 
