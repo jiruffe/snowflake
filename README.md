@@ -1,4 +1,4 @@
-snowflake ![](./snowflake.svg){:height="100px"}
+snowflake ![](./snowflake.svg)
 ===
 
 [Twitter Snowflake](https://github.com/twitter/snowflake) ID Generator.
